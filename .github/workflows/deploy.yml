@@ -34,7 +34,7 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip setuptools wheel
           pip uninstall -y aws-cdk.aws-eks aws-cdk.core || true
-          pip install aws-cdk-lib==2.200.1 constructs==10.3.0 cdk-cli
+          pip install aws-cdk-lib==2.200.1 constructs==10.3.0
 
       - name: Verify CDK package source and version
         run: |
