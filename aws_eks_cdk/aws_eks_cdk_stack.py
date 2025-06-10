@@ -1,6 +1,7 @@
 from aws_cdk import (
     Stack,
     aws_eks as eks,
+    aws_ec2 as ec2,
     aws_lambda as _lambda,
 )
 from constructs import Construct
@@ -13,5 +14,5 @@ class AwsEksCdkStack(Stack):
             self, "MyEksCluster",
             version=eks.KubernetesVersion.V1_29,
             default_capacity=2,
-            default_capacity_instance=eks.InstanceType("t3.medium"),
+            default_capacity_instance=ec2.InstanceType("t3.medium"),
         )
