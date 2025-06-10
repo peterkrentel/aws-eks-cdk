@@ -39,7 +39,7 @@ jobs:
       - name: Verify CDK package source and version
         run: |
           source .venv/bin/activate
-          python -c "import aws_cdk; print('CDK:', aws_cdk.__version__)"
+          pip show aws-cdk-lib
           python -c "from aws_cdk import aws_eks as eks; import inspect; print('eks.Cluster:', inspect.getfile(eks.Cluster))"
 
       - name: Configure AWS credentials
