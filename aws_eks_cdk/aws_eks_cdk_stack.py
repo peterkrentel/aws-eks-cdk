@@ -2,7 +2,6 @@ from aws_cdk import (
     Stack,
     aws_eks as eks,
     aws_ec2 as ec2,
-    aws_lambda as _lambda,
 )
 from constructs import Construct
 
