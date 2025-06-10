@@ -24,7 +24,7 @@ jobs:
 
       - name: Install AWS CDK
         run: |
-          npm install -g aws-cdk@2.x
+          npm install -g aws-cdk@latest
 
       - name: Clean up previous virtual environment
         run: |
@@ -46,8 +46,6 @@ jobs:
 
       - name: Check installed CDK version
         run: |
-          source .venv/bin/activate
-          pip show aws-cdk-lib
           cdk --version
 
       - name: Configure AWS credentials
