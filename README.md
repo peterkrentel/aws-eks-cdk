@@ -56,3 +56,11 @@ command.
  * `cdk docs`        open CDK documentation
 
 Enjoy!
+
+# actual commands
+```
+mkdir eks-cdk-python && cd eks-cdk-python
+cdk init app --language python
+source .venv/bin/activate
+pip install aws-cdk-lib constructs
+```
