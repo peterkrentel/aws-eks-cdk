@@ -58,9 +58,9 @@ jobs:
       - name: CDK Bootstrap
         run: |
           source .venv/bin/activate
-          cdk bootstrap
+          npx cdk bootstrap
 
       - name: Deploy CDK Stack
         run: |
           source .venv/bin/activate
-          cdk deploy --require-approval never
+          npx cdk deploy --require-approval never
