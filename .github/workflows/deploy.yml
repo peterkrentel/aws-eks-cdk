@@ -12,42 +12,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Set up Node.js (for CDK CLI)
+      - name: Set up Node.js (for CDK CLI, if needed)
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Install AWS CDK
-        run: |
-          npm install -g aws-cdk@latest
-
-      - name: Clean up previous virtual environment
-        run: |
-          rm -rf .venv
-
-      - name: Install dependencies
+      - name: Clean install Python dependencies
         run: |
           rm -rf .venv
           python -m venv .venv
           source .venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --upgrade pip setuptools wheel
+          pip uninstall -y aws-cdk.aws-eks aws-cdk.core || true
+          pip install aws-cdk-lib==2.200.1 constructs==10.3.0 cdk-cli
 
-      - name: Debug Python Path
+      - name: Verify CDK package source and version
         run: |
           source .venv/bin/activate
-          which python
-          python --version
-          pip show aws-cdk-lib
-
-      - name: Check installed CDK version
-        run: |
-          cdk --version
+          python -c "import aws_cdk; print('CDK:', aws_cdk.__version__)"
+          python -c "from aws_cdk import aws_eks as eks; import inspect; print('eks.Cluster:', inspect.getfile(eks.Cluster))"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
