@@ -24,7 +24,7 @@ jobs:
 
       - name: Install AWS CDK
         run: |
-          npm install -g aws-cdk@2.200.1
+          npm install -g aws-cdk@2.x
 
       - name: Clean up previous virtual environment
         run: |
