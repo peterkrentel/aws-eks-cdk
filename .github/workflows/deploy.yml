@@ -28,9 +28,7 @@ jobs:
 
       - name: Clean up previous virtual environment
         run: |
-          if [ -d ".venv" ]; then
-            rm -rf .venv
-          fi
+          rm -rf .venv
 
       - name: Install dependencies
         run: |
@@ -38,6 +36,13 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Debug Python Path
+        run: |
+          source .venv/bin/activate
+          which python
+          python --version
+          pip show aws-cdk-lib
 
       - name: Check installed CDK version
         run: |
