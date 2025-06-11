@@ -14,5 +14,4 @@ class AwsEksCdkStack(Stack):
             self, "MyEksCluster",
             version=eks.KubernetesVersion.V1_29,
             default_capacity=2,
-            default_capacity_instance_type=ec2.InstanceType("t3.medium"),
         )
