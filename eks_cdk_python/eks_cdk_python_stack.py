@@ -16,9 +16,13 @@ class EksCdkPythonStack(Stack):
             assumed_by=iam.AccountRootPrincipal()
         )
 
+        # Required in GitHub Actions even with CDK >=2.200.1
+        kubectl_layer = eks.KubectlLayer(self, "KubectlLayer")
+
         cluster = eks.Cluster(self, "EksCluster",
             vpc=vpc,
             version=eks.KubernetesVersion.V1_27,
             default_capacity=2,
-            masters_role=cluster_admin
+            masters_role=cluster_admin,
+            kubectl_layer=kubectl_layer
         )
