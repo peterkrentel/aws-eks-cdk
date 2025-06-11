@@ -34,7 +34,8 @@ jobs:
           source .venv/bin/activate
           pip install --upgrade pip setuptools wheel
           pip uninstall -y aws-cdk.aws-eks aws-cdk.core || true
-          pip install -r requirements.txt
+          pip install -r --no-cache-dir requirements.txt
+          python -c "import aws_cdk.aws_eks as eks; help(eks.Cluster)"
 
       - name: Verify CDK package source and version
         run: |
