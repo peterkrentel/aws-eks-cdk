@@ -9,18 +9,16 @@ class AwsEksCdkStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs):
         super().__init__(scope, construct_id, **kwargs)
 
-        # Create VPC for the cluster (required)
         vpc = ec2.Vpc(self, "EksVpc", max_azs=2)
 
-        # Required: explicitly provide the kubectl layer
-        kubectl_layer = eks.KubectlLayer(self, "KubectlLayer")
-
-        # Create EKS Cluster
         cluster = eks.Cluster(
             self, "MyEksCluster",
             version=eks.KubernetesVersion.V1_29,
             vpc=vpc,
-            kubectl_layer=kubectl_layer,
-            default_capacity=2,
-            default_capacity_instance_type=ec2.InstanceType("t3.medium"),
+            default_capacity=0  # No default EC2 nodes
+        )
+
+        cluster.add_nodegroup_capacity("DefaultNodeGroup",
+            desired_size=2,
+            instance_types=[ec2.InstanceType("t3.medium")]
         )
