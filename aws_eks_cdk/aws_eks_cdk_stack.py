@@ -13,7 +13,6 @@ class AwsEksCdkStack(Stack):
         eks.Cluster(
             self, "MyEksCluster",
             version=eks.KubernetesVersion.V1_29,
-            kubectl_layer=eks.KubectlLayer(self, "KubectlLayer"),
             default_capacity=2,
             default_capacity_instance=ec2.InstanceType("t3.medium"),
         )
